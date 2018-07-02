@@ -1,0 +1,21 @@
+     A          R CBX902R
+     **
+     A            JLKEY         12A         COLHDG('LOG KEY')
+     A            JLDATE          L         COLHDG('LOG DATE')
+     A            JLTIME          T         COLHDG('LOG TIME')
+     A            JLJOB         10A         COLHDG('JOB NAME')
+     A            JLUSER        10A         COLHDG('JOB USER')
+     A            JLNBR          6S 0       COLHDG('JOB NUMBER')
+     A            JLUSPF        10A         COLHDG('USER PROFILE')
+     A            JLPGM         10A         COLHDG('PROGRAM NAME')
+     A            JLOBJ         10A         COLHDG('FILE NAME')
+     A            JLLIB         10A         COLHDG('FILE LIBRARY')
+     A            JLENTP         1A         COLHDG('LOG ENTRY TYPE')
+     A                                      TEXT('A=ADD, C=CHG, D=DLT')
+     A            JLFLD         10A         COLHDG('FIELD NAME')
+     A            JLVALB        50          COLHDG('VALUE BEFORE')
+     A            JLVALA        50          COLHDG('VALUE AFTER')
+     **
+     A          K JLKEY
+     A          K JLDATE                    DESCEND
+     A          K JLTIME                    DESCEND
