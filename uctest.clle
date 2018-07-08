@@ -1,0 +1,14 @@
+/* PUREBA PARA URBAN CODE        */
+
+
+   PGM
+
+             ADDLIBLE   LIB(GPLILIBRA)
+             MONMSG     MSGID(CPF2103)
+             ADDLIBLE   LIB(GPLSLIBRA)
+             MONMSG     MSGID(CPF2103)
+
+
+
+
+   ENDPGM

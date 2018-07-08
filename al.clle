@@ -1,0 +1,16 @@
+ /* */
+
+
+    PGM
+
+
+             ADDLIBLE   LIB(DSVLIBPR)
+             ADDLIBLE   LIB(DSVLIBPA)
+             ADDLIBLE   LIB(DSVLIBPDM)
+             ADDLIBLE   LIB(GPLILIBRA)
+             ADDLIBLE   LIB(GPLSLIBRA)
+             CHGCURLIB  CURLIB(DSVLIBPR)
+             ADDLIBLE   LIB(AMBLIBPR)
+             STRPDM
+
+    ENDPGM

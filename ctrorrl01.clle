@@ -1,0 +1,9 @@
+pgm
+         qsh cmd('/opt/novell/+
+         dirxml_jremote -config /opt/novell/config8000.txt +
+          -sp novell novell')
+      monmsg msgid(CPF0000)
+         qsh cmd('/opt/novell/+
+         dirxml_jremote -config /opt/novell/config8000.txt &')
+      monmsg msgid(CPF0000)
+endpgm
