@@ -10,6 +10,7 @@ Ig01 ?*=================================================================
 |     * Se modifica el programa para que la solicitud sea resuelta
 |     * desde un servidor creado para STA, la lógica del proceso la
 |     * tiene el programa STAC1ONS1.
+      *test commit
 |    ?*?Requerimiento........:?PMO13188 - STA_SONTENIBILIDAD
 |    ?*?Autor................:?John Leandro Vásquez Velásquez
 |    ?*?Empresa..............:?Intergrupo

@@ -2,6 +2,7 @@
       *   AUTOR: CaRLOS Rojas  - 2018                                  *
       *----------------------------------------------------------------*
       * Crea archivo temporal de trabajo para el monitoreo de archivos *
+      *test commit                                                     *
       *----------------------------------------------------------------*
       ***************************************************************
        /Copy ctrlibpr/ctrSrc,CTRRCTRH01

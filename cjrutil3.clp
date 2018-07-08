@@ -1,6 +1,7 @@
 /*********************************************************************/
 /* ESTE PROGRAMA ES EL PROCESADOR DEL MANDATO DEL MISMO NOMBRE.      */
 /* ESTE MANDATO DEVUELVE EL ESTADO ACTUAL DE UN TRABAJO.             */
+/*TEST COMMIT      */
 /*-------------------------------------------------------------------*/
 /* PARÁMETROS DE ENTRADA:                                            */
 /* - JOB CHAR(26): NOMBRE CALIFICADO DEL TRABAJO (SIN SLASES)        */
