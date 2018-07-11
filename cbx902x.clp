@@ -1,6 +1,6 @@
   PGM        &APPLIB
 
-    /*-- PARAMETER - LIBRARY TO CONTAIN LOG SYSTEM:  --------------------*/
+    /*-C PARAMETER - LIBRARY TO CONTAIN LOG SYSTEM:  --------------------*/
        DCL        &APPLIB      *CHAR    10
     /*--*TEST COMMIT */
        CRTDTAARA  &APPLIB/CBX902D       *DEC    10   VALUE( 0 )

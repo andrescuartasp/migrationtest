@@ -1,5 +1,5 @@
 /*********************************************************************/
-/* ESTE PROGRAMA ES EL PROCESADOR DEL MANDATO DEL MISMO NOMBRE.      */
+/* ESTEQWRWGRAMA ES EL PROCESADOR DEL MANDATO DEL MISMO NOMBRE.      */
 /* ESTE MANDATO DEVUELVE EL ESTADO ACTUAL DE UN TRABAJO.             */
 /* *TEST COMMIT */
 /*-------------------------------------------------------------------*/

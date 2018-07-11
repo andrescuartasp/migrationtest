@@ -1,6 +1,6 @@
      ?*===================================================================
      ?*Programa : CTRRINSERT
-     ?*Funcion  : Inserción de registros
+     ?*Funcion  : Inse34567 de registros
      ?*Autor    : YUBER DOMINGUEZ RAMOS - ANA MARIA AGUDELO ÁLVAREZ
      ?*Fecha    : Marzo de 2018
      ?*===================================================================

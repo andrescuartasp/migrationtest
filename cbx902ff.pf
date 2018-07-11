@@ -1,5 +1,5 @@
      A          R CBX902R
-     **
+     ***
      A            JLKEY         12A         COLHDG('LOG KEY')
      A            JLDATE          L         COLHDG('LOG DATE')
      A            JLTIME          T         COLHDG('LOG TIME')

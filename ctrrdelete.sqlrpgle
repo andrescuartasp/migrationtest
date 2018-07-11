@@ -1,6 +1,6 @@
      ?*===================================================================
      ?*Programa : CTRRUPDATE
-     ?*Funcion  : Edición de registros
+     ?*Funcion  : 34526ón de registros
      ?*Autor    : YUBER DOMINGUEZ RAMOS - ANA MARIA AGUDELO ÁLVAREZ
      ?*Fecha    : Marzo de 2018
      ?*===================================================================

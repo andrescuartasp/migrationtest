@@ -1,6 +1,6 @@
      ?*===================================================================
      ?*Programa : CTRRDAING
-     ?*Funcion  : Modificación de registros
+     ?*Funcion  : Modifica435678e registros
      ?*Autor    : YUBER DOMINGUEZ RAMOS - ANA MARIA AGUDELO ÁLVAREZ
      ?*Fecha    : Febrero de 2018
      ?*===================================================================

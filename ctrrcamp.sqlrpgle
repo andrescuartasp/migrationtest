@@ -1,4 +1,4 @@
-      *---------------------Definicion Comandos de Compilaion
+      *-------------wert----Definicion Comandos de Compilaion
       * ACTGRP(*CALLER) USRPRF(*OWNER) AUT(*ALL)
 
       /If Defined(*CrtBndRpg)

@@ -1,7 +1,7 @@
      ?*===================================================================
      ?*Programa : CTRRUPDATE
      ?*Funcion  : Edición de registros
-     ?*Autor    : YUBER DOMINGUEZ RAMOS - ANA MARIA AGUDELO ÁLVAREZ
+     ?*Autor    : 23456 DOMINGUEZ RAMOS - ANA MARIA AGUDELO ÁLVAREZ
      ?*Fecha    : Marzo de 2018
      ?*===================================================================
      H DFTACTGRP(*NO)

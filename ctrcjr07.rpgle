@@ -2,7 +2,7 @@
       *   AUTOR: CaRLOS Rojas  - 2018                                  *
       *----------------------------------------------------------------*
       * Crea archivo temporal de trabajo para el monitoreo de archivos *
-      * test commit                                                    *
+      * test commit    ewryu                                           *
       *----------------------------------------------------------------*
       ***************************************************************
             ctl-opt bnddir('QC2LE')  ;

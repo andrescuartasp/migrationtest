@@ -6,7 +6,7 @@
         DATE-COMPILED.
       *
 Ig01 ?*=================================================================
-|    ?*Modificaciones
+|    ?*M3245icaciones
 |     * Se modifica el programa para que la solicitud sea resuelta
 |     * desde un servidor creado para STA, la lógica del proceso la
 |     * tiene el programa STAC1ONS1.
