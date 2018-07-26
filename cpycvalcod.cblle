@@ -1,0 +1,175 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   STACVALCOD.
+       AUTHOR.       Beatriz Zuluaga G.
+       INSTALLATION. BANCO INDUSTRIAL COLOMBIANO MEDELLIN.
+       DATE-WRITTEN. Julio 14/92.
+       DATE-COMPILED.
+       SECURITY.     Busca el valor de cambio para un codigo en una
+      *              fecha especifica
+      *              Recibe como parametros la fecha y el codigo del
+      *              tipo de cambio, y devuelve la tasa del dia, el
+      *              nombre, el pais, el codigo SWIFT y un indicador
+      *              que puede tener uno de los siguientes valores :
+      *              . 0 -> Busqueda exitosa
+      *              . 1 -> Valor no actualizado
+      *              . 2 -> No existe descripcion del codigo
+      *              . 3 -> No existe registro de cambio
+      *              . 4 -> Valor de la ultima actualizacion
+      *
+Ig01 ?*=================================================================
+|    ?*Modificaciones
+|     * Se modifica el programa para que la solicitud sea resuelta
+|     * desde un servidor creado para STA, la lógica del proceso la
+|     * tiene el programa STAC1ALCOD.
+|    ?*?Requerimiento........:?PMO13188 - STA_SONTENIBILIDAD
+|    ?*?Autor................:?John Leandro Vásquez Velásquez
+|    ?*?Empresa..............:?Intergrupo
+|    ?*?Fecha de Modificación:?Julio - 2012
+|    ?*?Compilar con 15 para  ?crear el modulo y luego crear el pgm
+|    ?*?CRTPGM PGM(CPYCVALCOD)?MODULE(CPYCVALCOD) ACTGRP(*CALLER) USRPRF(*USER)
+Ig01 ?*=================================================================
+      *
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.
+       SOURCE-COMPUTER. IBM-AS400.
+       OBJECT-COMPUTER. IBM-AS400.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+       DATA DIVISION.
+       FILE SECTION.
+      *
+       WORKING-STORAGE SECTION.
+       77  O-CODRESP    PIC  9(01).
+       01 W-TRAMA-COMPONENTE.
+          05 W-ENCABEZADO-DE-CONTROL.
+             10 W-VERSION-ENCAB   PIC X(02).
+             10 W-ID-SERVIDOR-DES PIC X(03).
+             10 W-ID-APLIC-CL     PIC X(03).
+             10 W-REQ-REVERSO     PIC X(01).
+             10 W-LOGITUD-CARGA-U PIC X(05).
+             10 W-LIBRE           PIC X(01).
+          05 W-ENCABEZADO-DE-DATOS.
+             10 W-TIPO-MENSAJE    PIC X(02).
+             10 W-CODIGO-TX       PIC X(04).
+             10 W-SECUENCIA       PIC X(20).
+             10 W-REQ-RESPUESTA   PIC X(01).
+             10 W-COD-RESPUESTA   PIC X(04).
+             10 W-DES-RESPUESTA   PIC X(50).
+             10 W-LIBRE2          PIC X(09).
+          05 W-CARGA-UTIL.
+             10 W-CARGA-UTIL-X    PIC X(5000).
+
+       01 CARGA-UTIL.
+          02 LSANO      PIC 9(04).
+          02 LSMES      PIC 9(02).
+          02 LSDIA      PIC 9(02).
+          02 LSCODCAM   PIC 9(02).
+          02 LSCODSWI   PIC X(03).
+          02 LSNOMBRE   PIC X(25).
+          02 LSPAIS     PIC X(20).
+          02 LSVALCAM   PIC 9(05)V9(05) COMP-3.
+          02 LSINDIC    PIC 9(01).
+          02 FILLER     PIC X(4936).
+      *
+       01 W-TRAMA-IAST.
+          02  TRAMA-ENCDATOS   PIC  X(55).
+          02  TRAMA-CARGAUTIL  PIC  X(5000).
+
+       LINKAGE SECTION.
+       01 LS-ANO      PIC 9(04).
+       01 LS-MES      PIC 9(02).
+       01 LS-DIA      PIC 9(02).
+       01 LS-CODCAM   PIC 9(02).
+       01 LS-CODSWI   PIC X(03).
+       01 LS-NOMBRE   PIC X(25).
+       01 LS-PAIS     PIC X(20).
+       01 LS-VALCAM   PIC 9(05)V9(05) COMP-3.
+       01 LS-INDIC    PIC 9(01).
+      *
+       PROCEDURE DIVISION USING LS-ANO    LS-MES    LS-DIA
+                                LS-CODCAM LS-CODSWI LS-NOMBRE
+                                LS-PAIS   LS-VALCAM LS-INDIC.
+      *
+       000-INICIAR.
+
+           PERFORM 020-INICIAR-VARIABLES
+
+           MOVE   0  TO  O-CODRESP
+           CALL   "STAOADLIB" USING O-CODRESP
+
+            IF  O-CODRESP = 0
+                CALL   "STAC1ALCOD" USING W-TRAMA-IAST
+                MOVE TRAMA-CARGAUTIL TO   CARGA-UTIL
+
+            ELSE
+
+                CALL   "COMRIAST" USING W-TRAMA-COMPONENTE
+                CANCEL "COMRIAST"
+                MOVE W-CARGA-UTIL-X TO   CARGA-UTIL
+
+      *         ==================================
+      *         ERROR POR TIME OUT EN EL SERVICIO
+               IF W-COD-RESPUESTA = "7001" OR W-COD-RESPUESTA = "7000"
+                   CALL   "STAOADLIB" USING O-CODRESP
+                   PERFORM 020-INICIAR-VARIABLES
+                   CALL   "STAC1ALCOD" USING W-TRAMA-IAST
+                   MOVE TRAMA-CARGAUTIL TO   CARGA-UTIL
+               ELSE
+      *         ==================================
+      *         TRANSACCIÓN NO HABILITADA
+                  IF W-COD-RESPUESTA = "7005"
+                     PERFORM 020-INICIAR-VARIABLES
+                     CALL "STAC1ALCOD" USING W-TRAMA-IAST
+                     MOVE TRAMA-CARGAUTIL TO   CARGA-UTIL
+                  END-IF
+               END-IF
+
+            END-IF
+
+           MOVE LSVALCAM       TO   LS-VALCAM
+           MOVE LSCODSWI       TO   LS-CODSWI
+           MOVE LSNOMBRE       TO   LS-NOMBRE
+           MOVE LSPAIS         TO   LS-PAIS
+           MOVE LSINDIC        TO   LS-INDIC
+
+           PERFORM 999-TERMINAR.
+
+      *
+       020-INICIAR-VARIABLES.
+      *W-TRAMA-COMPONENTE
+      *  W-ENCABEZADO-DE-CONTROL
+           MOVE "MS"           TO   W-VERSION-ENCAB
+           MOVE "STA"          TO   W-ID-SERVIDOR-DES
+           MOVE "STA"          TO   W-ID-APLIC-CL
+           MOVE "N"            TO   W-REQ-REVERSO
+           MOVE "01300"        TO   W-LOGITUD-CARGA-U
+           MOVE SPACES         TO   W-LIBRE
+      *  W-ENCABEZADO-DE-DATOS
+           MOVE "TS"           TO   W-TIPO-MENSAJE
+           MOVE "0006"         TO   W-CODIGO-TX
+           MOVE SPACES         TO   W-SECUENCIA
+           MOVE "S"            TO   W-REQ-RESPUESTA
+           MOVE SPACES         TO   W-COD-RESPUESTA
+           MOVE SPACES         TO   W-DES-RESPUESTA
+           MOVE SPACES         TO   W-LIBRE2
+      *  W-CARGA-UTIL
+           MOVE SPACES         TO   W-CARGA-UTIL-X
+
+      *W-TRAMA-IAST
+           MOVE SPACES        TO   TRAMA-ENCDATOS
+           MOVE SPACES        TO   TRAMA-CARGAUTIL
+
+      *PARAMETROS DE ENTRADA
+           MOVE LS-ANO         TO   LSANO
+           MOVE LS-MES         TO   LSMES
+           MOVE LS-DIA         TO   LSDIA
+           MOVE LS-CODCAM      TO   LSCODCAM
+           MOVE ZEROS          TO   LSVALCAM LSINDIC
+           MOVE SPACES         TO   LSCODSWI LSNOMBRE LSPAIS
+
+           MOVE CARGA-UTIL     TO   W-CARGA-UTIL-X
+           MOVE CARGA-UTIL     TO   TRAMA-CARGAUTIL.
+      *
+       999-TERMINAR.
+           EXIT PROGRAM
+           STOP RUN.
